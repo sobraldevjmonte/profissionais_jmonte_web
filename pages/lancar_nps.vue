@@ -13,7 +13,7 @@
             </v-card-text>
           </v-card>
 
-          <v-card class="mb-4" style="height: 120px">
+          <v-card class="mb-4" style="height: 120px; background-color: #DFF1FF;">
             <router-link
               to="/lancar_np"
               class="text-decoration-none d-flex align-center"
@@ -21,9 +21,9 @@
             >
               <div class="d-flex align-center">
                 <v-img
-                  src="img_atalhos/lancar_pedido.png"
-                  height="50"
-                  width="50"
+                  src="img_atalhos/a.avif"
+                  height="60"
+                  width="60"
                 ></v-img>
                 <span class="font-size-medium ml-2">Lançar Np/Nfe/NfCe</span>
               </div>
@@ -37,9 +37,9 @@
             >
               <div class="d-flex align-center">
                 <v-img
-                  src="img_atalhos/acompanhar_pedido.png"
-                  height="50"
-                  width="50"
+                  src="img_atalhos/b.jpeg"
+                  height="60"
+                  width="60"
                 ></v-img>
                 <span class="font-size-medium ml-2">Acompanhar Pedidos</span>
               </div>

@@ -99,6 +99,7 @@
              color="info"
               block
               elevation="5"
+              height="40px"
               to="/lancar_nps"
             >
              Voltar 
