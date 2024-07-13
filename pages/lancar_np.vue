@@ -65,13 +65,13 @@
           <!--v-file-input capture="camera" /-->
 
           <!--input type="file" @change="uploadImage"  title="abutab"/-->
-          <v-icon
+          <!-- <v-icon
             @click="anexarComprovante()"
             @change="validarAnexo()"
             color="blue"
             v-if="comprovante_size > 0"
             >send</v-icon
-          >
+          > -->
         </v-row>
       </div>
     </template>
