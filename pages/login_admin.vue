@@ -197,7 +197,7 @@ export default {
             this.showSnackBar("Sucesso!", 4000);
             this.$router.push("/admin");
           } else if (n === "2") {
-            this.$router.push("/profissionais");
+            this.$router.push("/lancar_nps");
           } else if (n === "99") {
             console.log("---------------- nivel 99 ----------------------");
           }

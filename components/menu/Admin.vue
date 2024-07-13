@@ -79,7 +79,7 @@ export default {
         {
           icon: 'swap_horiz',
           title: 'Entrar/Sair',
-          to: '/login_admin',
+          to: '/login',
         },
         /* {
           icon: 'swap_horiz',
