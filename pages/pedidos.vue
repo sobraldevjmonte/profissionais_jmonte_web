@@ -275,7 +275,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .cliente {
   background-color: #d1d3e0;
   color: #000;

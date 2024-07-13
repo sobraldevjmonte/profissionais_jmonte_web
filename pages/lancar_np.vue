@@ -284,7 +284,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .custom-font-size .v-label {
   font-size: 1.0rem; /* Tamanho da fonte do label */
   font-weight: bold; /* Deixa o label em negrito */
