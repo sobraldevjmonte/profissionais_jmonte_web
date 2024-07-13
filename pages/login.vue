@@ -33,7 +33,7 @@
             <template>
               <div>
                 <v-form v-model="valid" ref="form">
-                  <v-row style="max-width: 80%; padding: 20px">
+                  <v-row style="max-width: 300px; padding: 20px">
                     <v-img src="logo.jpg" class="background-image"></v-img>
                   </v-row>
                   <v-row>
@@ -129,16 +129,13 @@
                           >
                         </v-col>
                       </v-row>
-                      <div v-if="loading" class="overlay">
-                        <div class="spinner"></div>
-                      </div>
                     </div>
                   </template>
                 </v-form>
               </div>
             </template>
             <v-divider></v-divider>
-            <div class="pa-2 grey--text text-caption">V1.0.16 (08/07/2024)</div>
+            <div class="pa-2 grey--text text-caption">V1.0.5 (13/07/2024)</div>
           </v-card>
         </v-flex>
       </v-layout>
@@ -323,4 +320,5 @@ input[type="number"] {
     transform: rotate(360deg);
   }
 }
+
 </style>

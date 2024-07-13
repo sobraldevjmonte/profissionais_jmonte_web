@@ -1,6 +1,3 @@
-<template lang="">
-  <div></div>
-</template>
 <template>
   <div>
     <MenuProfissionais :usuariologado="nomeUsuario" />
