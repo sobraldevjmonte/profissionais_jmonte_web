@@ -1,117 +1,71 @@
-<template lang="">
-  <div></div>
-</template>
+<template>
+  <v-app>
+    <v-container fluid>
+      <MenuProfissionais :usuariologado="nomeUsuario" />
 
-<template lang="">
-  <div style="max-width: 400px">
-    <MenuProfissionais :usuariologado="nomeUsuario" />
-    <template>
-      <div class="pa-2 mt-1 mb-1">
-        <v-form v-model="valid" ref="form">
-          <v-row>
-            <v-col cols="12" class="text-center pa-5 mt-5 pt-5">
-              <span class="central-text"
-                >Digite sua nota de venda (NP) ou NFe no aplicativo e dê um
-                passo rumo ao sucesso!
+      <v-row class="d-flex justify-center" style="min-height: 100vh">
+        <v-col cols="11" sm="8" md="6" lg="4">
+          <v-card class="mb-4" style="height: 120px" elevation="0">
+            <v-card-text class="d-flex align-center justify-center">
+              <span class="central-text">
+                Digite sua nota de venda (NP) ou NFe no aplicativo e dê um passo
+                rumo ao sucesso!
               </span>
-            </v-col>
-            <v-col cols="12">
-              <v-text-field
-                class=""
-                type="text"
-                error-count=""
-                placeholder=""
-                label="Número NP/Nota Fiscal"
-                v-model="numeronp"
-                outlined
-                color
-                dense
-                counter="15"
-                required
-                min="4"
-                @input="validarCampos"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12">
-              <v-select
-                v-model="lojaselecionada"
-                :items="lista_lojas"
-                item-value="value"
-                label="Selecione a Loja"
-                overflow
-                editable
-                class="text-caption font-weight-light custom-font-size"
-                @change="selecionarLoja"
-                :menu-props="{ contentClass: 'red-first-item' }"
-                @input="validarCampos"
-              ></v-select>
-            </v-col>
-          </v-row>
-        </v-form>
-      </div>
-    </template>
+            </v-card-text>
+          </v-card>
 
-    <template>
-      <div class="pt-5 pl-2 pr-5 pb-5">
-        <v-row align="center" justify="center">
-          <v-file-input
-            @change="carregarImagem"
-            id="comprovante"
-            :key="comprovanteKey"
-            class="pr-5"
-            show-size
-            counter=""
-          ></v-file-input>
-          <!--v-file-input capture="camera" /-->
-
-          <!--input type="file" @change="uploadImage"  title="abutab"/-->
-          <v-icon
-            @click="anexarComprovante()"
-            @change="validarAnexo()"
-            color="blue"
-            v-if="comprovante_size > 0"
-            >send</v-icon
-          >
-        </v-row>
-      </div>
-    </template>
-
-    <template>
-      <div>
-        <v-row class="pa-2 justify-center">
-          <v-col>
-            <v-btn
-              :style="{
-                backgroundColor: cor_primaria,
-                color: 'white',
-                height: '40px',
-              }"
-              block
-              elevation="5"
-              @click="finalizarPedido()"
-              :disabled="botaoDesabilitado"
+          <v-card class="mb-4" style="height: 80px">
+            <router-link
+              to="/lancar_np"
+              class="text-decoration-none d-flex align-center"
+              style="height: 100%; width: 100%"
             >
-              Finalizar Pedido
-            </v-btn>
-          </v-col>
-        </v-row>
-      </div>
-    </template>
-    <v-snackbar v-model="snackbar" :timeout="timeout" class="text-center">
-      {{ texto_snackbar }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn color="blue" text v-bind="attrs" @click="snackbar = false">
-          Fechar
-        </v-btn>
-      </template>
-    </v-snackbar>
-    <template>
-      <div v-if="isLoading" class="loading-overlay">
-        <div class="loading-spinner"></div>
-      </div>
-    </template>
-  </div>
+              <div class="d-flex align-center">
+                <v-img
+                  src="img_atalhos/lancar_pedido.png"
+                  height="50"
+                  width="50"
+                ></v-img>
+                <span class="font-size-medium ml-2">Lançar Np/Nfe/NfCe</span>
+              </div>
+            </router-link>
+          </v-card>
+          <v-card class="mb-4" style="height: 80px">
+            <router-link
+              to="/pedidos"
+              class="text-decoration-none d-flex align-center"
+              style="height: 100%; width: 100%"
+            >
+              <div class="d-flex align-center">
+                <v-img
+                  src="img_atalhos/acompanhar_pedido.png"
+                  height="50"
+                  width="50"
+                ></v-img>
+                <span class="font-size-medium ml-2">Acompanhar Pedidos</span>
+              </div>
+            </router-link>
+          </v-card>
+          <v-card class="mb-4" style="height: 80px">
+            <router-link
+              to="/pagina3"
+              class="text-decoration-none d-flex align-center"
+              style="height: 100%; width: 100%"
+            >
+              <div class="d-flex align-center">
+                <v-img
+                  src="url_da_sua_imagem3.jpg"
+                  height="50"
+                  width="50"
+                ></v-img>
+                <span class="font-size-medium ml-2">Card 3</span>
+              </div>
+            </router-link>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -166,120 +120,55 @@ export default {
       //   this.getPedidos()
       //   // this.getPontosVendas()
     } else {
-      this.$router.push("/index_admin");
+      this.$router.push("/login");
+    }
+  },
+  mounted() {
+    this.showAlertSucesso = false;
+    this.showAlertErro = false;
+    this.getLogado();
+
+    if (this.logado === "S") {
+      //   this.showSistema = true
+      //   this.getPedidos()
+      //   // this.getPontosVendas()
+    } else {
+      this.$router.push("/login");
     }
   },
   methods: {
-    showSnackBar(msg, tempo) {
-      this.snackbar = true;
-      this.texto_snackbar = msg;
-      this.timeout = tempo;
-      this.comprovanteKey++;
-    },
-    limparCampos() {
-      this.numeronp = "";
-      this.lojaselecionada = null;
-      this.msg = "";
-      this.texto_snackbar = ""
-    },
-    async finalizarPedido(st) {
-      let dados = {
-        id_usuario: this.id_usuario,
-        lojaselecionada: this.lojaselecionada,
-        numeronp: this.numeronp,
-      };
-      const resposta = await axios.post(
-        `${this.host}vendas/finalizar_pedido_parceiro_jmonte/`,
-        dados,
-        { headers: { "Content-Type": "application/json" } }
-      );
-
-      const statusResposta = resposta.status;
-      this.id_venda = resposta.data.id_venda;
-
-      if (statusResposta === 201) {
-        this.anexarComprovante();
-        this.limparCampos();
-      }
-      // this.showSnackBar(
-      //   "Pedido finalizado! Aguarde processamento e retorno da administração.",
-      //   10000
-      // );
-    },
     getLogado() {
       this.logado = sessionStorage.getItem("logado");
       this.id_usuario = sessionStorage.getItem("idUsuario");
       this.nomeUsuario = sessionStorage.getItem("nomeUsuario");
     },
-    validarCampos() {
-      this.botaoDesabilitado =
-        this.numeronp.length < 4 ||
-        this.lojaselecionada < 1 ||
-        this.comprovante_size < 1;
-    },
-    selecionarLoja(e) {
-      console.log("*******loja selecionada : " + e);
-    },
-    carregarImagem(e) {
-      if (e) {
-        this.comprovante = e;
-        this.comprovante_nome = e.name;
-        this.comprovante_size = e.size;
-        this.validarCampos();
-      } else {
-        this.comprovante = null;
-        this.comprovante_nome = "";
-        this.comprovante_size = 0;
-      }
-    },
-    delay(milliseconds) {
-      return new Promise((resolve) => setTimeout(resolve, milliseconds));
-    },
-
-    async anexarComprovante(e) {
-      if (this.comprovante_size > 0) {
-        const dataForm = new FormData();
-        dataForm.append("comprovante", this.comprovante);
-
-        const resposta = await axios.post(
-          `${this.host}vendas/anexararquivos/${this.id_venda}`,
-          dataForm,
-          { headers: { "Content-Type": "multipart/form-data" } }
-        );
-        const statusResposta = resposta.status;
-        if (statusResposta === 200) {
-          this.showSnackBar("Comprovante anexado com sucesso!", 4000);
-          await this.delay(4500); // Aguarda 2 segundos
-          this.showSnackBar(
-            "Pedido finalizado! Aguarde processamento e retorno da administração.",
-            10000
-          );
-
-          await this.delay(10200); // Aguarda 2 segundos
-          this.showSnackBar(
-            "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
-            20000
-          );
-          
-
-          this.comprovante_nome = "";
-        } else {
-          this.showSnackBar("Não foi possível anexar o arquivo!", 4000);
-        }
-      } else {
-        this.showSnackBar("Comprovante não incluído!", 4000);
-      }
-    },
   },
 };
 </script>
-<style>
+<style scoped>
 .custom-font-size .v-label {
-  font-size: 1.0rem; /* Tamanho da fonte do label */
+  font-size: 1rem; /* Tamanho da fonte do label */
   font-weight: bold; /* Deixa o label em negrito */
 }
 
 .custom-font-size .v-input__control {
-  font-size: 1.0rem; /* Tamanho da fonte do texto de entrada, se necessário */
+  font-size: 1rem; /* Tamanho da fonte do texto de entrada, se necessário */
+}
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.font-size-medium {
+  font-size: 1.2rem; /* Tamanho da fonte */
+}
+
+.central-text {
+  text-align: center; /* Centraliza o texto dentro do card */
+}
+
+.v-card {
+  display: flex;
+  align-items: center;
+  padding-left: 16px; /* Ajuste o padding para alinhar à esquerda */
 }
 </style>
