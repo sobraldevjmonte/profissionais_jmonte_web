@@ -5,16 +5,15 @@
 
       <v-row class="d-flex justify-center" style="min-height: 100vh">
         <v-col cols="11" sm="8" md="6" lg="4">
-          <v-card class="mb-4" style="height: 120px" elevation="0">
+          <v-card class="mb-4" style="height: 80px" elevation="0">
             <v-card-text class="d-flex align-center justify-center">
               <span class="central-text">
-                Digite sua nota de venda (NP) ou NFe no aplicativo e dê um passo
-                rumo ao sucesso!
+               
               </span>
             </v-card-text>
           </v-card>
 
-          <v-card class="mb-4" style="height: 80px">
+          <v-card class="mb-4" style="height: 120px">
             <router-link
               to="/lancar_np"
               class="text-decoration-none d-flex align-center"
@@ -30,7 +29,7 @@
               </div>
             </router-link>
           </v-card>
-          <v-card class="mb-4" style="height: 80px">
+          <v-card class="mb-4" style="height: 120px">
             <router-link
               to="/pedidos"
               class="text-decoration-none d-flex align-center"
@@ -46,7 +45,7 @@
               </div>
             </router-link>
           </v-card>
-          <v-card class="mb-4" style="height: 80px">
+          <!-- <v-card class="mb-4" style="height: 80px">
             <router-link
               to="/pagina3"
               class="text-decoration-none d-flex align-center"
@@ -61,7 +60,7 @@
                 <span class="font-size-medium ml-2">Card 3</span>
               </div>
             </router-link>
-          </v-card>
+          </v-card> -->
         </v-col>
       </v-row>
     </v-container>
