@@ -234,13 +234,13 @@ export default {
             if (st === 200) {
               this.loading = false;
               this.showSnackBar("Comprovante anexado com sucesso!", 3000);
-              await this.delay(1000); // Aguarda 2 segundos
+              await this.delay(2000); // Aguarda 2 segundos
               this.showSnackBar(
                 "Pedido finalizado! Aguarde processamento e retorno da administração.",
                 3000
               );
 
-              await this.delay(1000); // Aguarda 2 segundos
+              await this.delay(2000); // Aguarda 2 segundos
               this.showSnackBar(
                 "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
                 5000
@@ -345,12 +345,11 @@ export default {
 }
 
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Cor semi-transparente */
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .loading-container {
   display: flex;
@@ -361,7 +360,18 @@ export default {
 
 .loading-text {
   color: white;
-  margin-top: 10px;
+  margin-top: 16px;
   font-size: 1.2rem;
+  font-weight: bold;
+}
+/* Campo de entrada numérico */
+.v-text-field--type-text input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.v-text-field--type-text input[type="number"]::-webkit-outer-spin-button,
+.v-text-field--type-text input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>
