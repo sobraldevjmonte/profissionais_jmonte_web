@@ -15,8 +15,8 @@
           <v-row>
             <v-col cols="12" class="text-center pa-5 mt-5 pt-5">
               <span class="central-text"
-                >Digite sua nota de venda (NP),NFe ou Cupom no aplicativo e dê um
-                passo rumo ao sucesso!
+                >Digite sua nota de venda (NP),NFe ou Cupom no aplicativo e dê
+                um passo rumo ao sucesso!
               </span>
             </v-col>
             <v-col cols="12">
@@ -264,30 +264,35 @@ export default {
         const dataForm = new FormData();
         dataForm.append("comprovante", this.comprovante);
 
-        const resposta = await axios.post(
-          `${this.host}vendas/anexararquivos/${this.id_venda}`,
-          dataForm,
-          { headers: { "Content-Type": "multipart/form-data" } }
-        );
-        const statusResposta = resposta.status;
-        this.loading = false;
-        if (statusResposta === 200) {
-          this.showSnackBar("Comprovante anexado com sucesso!", 4000);
-          await this.delay(4500); // Aguarda 2 segundos
-          this.showSnackBar(
-            "Pedido finalizado! Aguarde processamento e retorno da administração.",
-            10000
+        try {
+          const resposta = await axios.post(
+            `${this.host}vendas/anexararquivos/${this.id_venda}`,
+            dataForm,
+            { headers: { "Content-Type": "multipart/form-data" } }
           );
+          const statusResposta = resposta.status;
+          this.loading = false;
+          if (statusResposta === 200) {
+            this.showSnackBar("Comprovante anexado com sucesso!", 4000);
+            await this.delay(4500); // Aguarda 2 segundos
+            this.showSnackBar(
+              "Pedido finalizado! Aguarde processamento e retorno da administração.",
+              10000
+            );
 
-          await this.delay(10200); // Aguarda 2 segundos
-          this.showSnackBar(
-            "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
-            20000
-          );
+            await this.delay(10200); // Aguarda 2 segundos
+            this.showSnackBar(
+              "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
+              20000
+            );
 
-          this.comprovante_nome = "";
-        } else {
-          this.showSnackBar("Não foi possível anexar o arquivo!", 4000);
+            this.comprovante_nome = "";
+          } else {
+            this.showSnackBar("Não foi possível anexar o arquivo!", 4000);
+          }
+        } catch (error) {
+          console.error(error);
+        } finally {
         }
       } else {
         this.showSnackBar("Comprovante não incluído!", 4000);
