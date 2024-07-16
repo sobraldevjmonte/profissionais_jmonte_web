@@ -320,6 +320,4 @@ input[type="number"] {
     transform: rotate(360deg);
   }
 }
-
-
 </style>

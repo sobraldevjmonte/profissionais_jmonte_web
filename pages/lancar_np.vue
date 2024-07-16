@@ -3,7 +3,11 @@
 </template>
 
 <template lang="">
-  <div style="max-width: 400px">
+  <div
+    justify="center"
+    align="center"
+    style="background-color: #fffafa; max-width: 400px"
+  >
     <MenuProfissionais :usuariologado="nomeUsuario" />
     <template>
       <div class="pa-2 mt-1 mb-1">
@@ -11,7 +15,7 @@
           <v-row>
             <v-col cols="12" class="text-center pa-5 mt-5 pt-5">
               <span class="central-text"
-                >Digite sua nota de venda (NP) ou NFe no aplicativo e dê um
+                >Digite sua nota de venda (NP),NFe ou Cupom no aplicativo e dê um
                 passo rumo ao sucesso!
               </span>
             </v-col>
@@ -96,13 +100,13 @@
           </v-col>
           <v-col>
             <v-btn
-             color="info"
+              color="info"
               block
               elevation="5"
               height="40px"
               to="/lancar_nps"
             >
-             Voltar 
+              Voltar
             </v-btn>
           </v-col>
         </v-row>
@@ -117,11 +121,9 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <template>
-      <div v-if="isLoading" class="loading-overlay">
-        <div class="loading-spinner"></div>
-      </div>
-    </template>
+    <div v-if="loading" class="overlay">
+      <div class="spinner"></div>
+    </div>
   </div>
 </template>
 
@@ -153,6 +155,7 @@ export default {
       quant_anexos: 0,
 
       isLoading: false,
+      loading: false,
       botaoDesabilitado: true,
 
       numeronp: "",
@@ -191,27 +194,36 @@ export default {
       this.numeronp = "";
       this.lojaselecionada = null;
       this.msg = "";
-      this.texto_snackbar = ""
+      this.texto_snackbar = "";
     },
     async finalizarPedido(st) {
-      let dados = {
-        id_usuario: this.id_usuario,
-        lojaselecionada: this.lojaselecionada,
-        numeronp: this.numeronp,
-      };
-      const resposta = await axios.post(
-        `${this.host}vendas/finalizar_pedido_parceiro_jmonte/`,
-        dados,
-        { headers: { "Content-Type": "application/json" } }
-      );
+      this.loading = true;
 
-      const statusResposta = resposta.status;
-      this.id_venda = resposta.data.id_venda;
+      try {
+        let dados = {
+          id_usuario: this.id_usuario,
+          lojaselecionada: this.lojaselecionada,
+          numeronp: this.numeronp,
+        };
+        const resposta = await axios.post(
+          `${this.host}vendas/finalizar_pedido_parceiro_jmonte/`,
+          dados,
+          { headers: { "Content-Type": "application/json" } }
+        );
 
-      if (statusResposta === 201) {
-        this.anexarComprovante();
-        this.limparCampos();
+        const statusResposta = resposta.status;
+        this.id_venda = resposta.data.id_venda;
+
+        if (statusResposta === 201) {
+          this.anexarComprovante();
+          this.limparCampos();
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.loading = false;
       }
+
       // this.showSnackBar(
       //   "Pedido finalizado! Aguarde processamento e retorno da administração.",
       //   10000
@@ -224,7 +236,7 @@ export default {
     },
     validarCampos() {
       this.botaoDesabilitado =
-        this.numeronp.length < 4 ||
+        this.numeronp.length < 1 ||
         this.lojaselecionada < 1 ||
         this.comprovante_size < 1;
     },
@@ -271,7 +283,6 @@ export default {
             "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
             20000
           );
-          
 
           this.comprovante_nome = "";
         } else {
@@ -286,11 +297,25 @@ export default {
 </script>
 <style scoped>
 .custom-font-size .v-label {
-  font-size: 1.0rem; /* Tamanho da fonte do label */
+  font-size: 1rem; /* Tamanho da fonte do label */
   font-weight: bold; /* Deixa o label em negrito */
 }
 
 .custom-font-size .v-input__control {
-  font-size: 1.0rem; /* Tamanho da fonte do texto de entrada, se necessário */
+  font-size: 1rem; /* Tamanho da fonte do texto de entrada, se necessário */
+}
+.spinner {
+  border: 4px solid #dc4949;
+  border-left-color: #c95151;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 </style>
