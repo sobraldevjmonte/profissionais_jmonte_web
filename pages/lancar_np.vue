@@ -193,10 +193,12 @@ export default {
     limparCampos() {
       this.numeronp = "";
       this.lojaselecionada = null;
-      this.msg = "";
-      this.texto_snackbar = "";
+      // this.msg = "";
+      // this.texto_snackbar = "";
     },
     async finalizarPedido(st) {
+      this.msg = "";
+      this.texto_snackbar = "";
       this.loading = true;
 
       try {
@@ -214,25 +216,31 @@ export default {
         const statusResposta = resposta.status;
         this.id_venda = resposta.data.id_venda;
 
+        
         if (statusResposta === 201) {
-          
-         let st =  await this.anexarComprovante();
-          console.log(st);
-          if (st === 200) {
-            this.loading = false;
-            this.showSnackBar("Comprovante anexado com sucesso!", 3000);
-            await this.delay(3000); // Aguarda 2 segundos
-            this.showSnackBar(
-              "Pedido finalizado! Aguarde processamento e retorno da administração.",
-              5000
-            );
+          try {
+            let st = await this.anexarComprovante();
+            console.log(st);
+            if (st === 200) {
+              this.loading = false;
+              this.showSnackBar("Comprovante anexado com sucesso!", 2000);
+              await this.delay(2000); // Aguarda 2 segundos
+              this.showSnackBar(
+                "Pedido finalizado! Aguarde processamento e retorno da administração.",
+                3000
+              );
 
-            await this.delay(5000); // Aguarda 2 segundos
-            this.showSnackBar(
-              "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
-              10000
-            );
-
+              await this.delay(3000); // Aguarda 2 segundos
+              this.showSnackBar(
+                "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
+                5000
+              );
+            } else {
+              this.showSnackBar("Não foi possível anexar o arquivo!", 3000);
+            }
+          } catch (error) {
+            console.log(error);
+          } finally {
             this.comprovante_nome = "";
             this.limparCampos();
           }
@@ -289,12 +297,8 @@ export default {
             dataForm,
             { headers: { "Content-Type": "multipart/form-data" } }
           );
-          const statusResposta = resposta.status;
-          if (statusResposta === 200) {
-            return statusResposta;
-          } else {
-            this.showSnackBar("Não foi possível anexar o arquivo!", 4000);
-          }
+
+          return resposta.status;
         } catch (error) {
           console.error(error);
         }
@@ -316,11 +320,11 @@ export default {
 }
 .spinner {
   border: 4px solid #dc4949;
-  border-left-color: #c95151;
+  border-left-color: #e18585;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 1s linear infinite;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
