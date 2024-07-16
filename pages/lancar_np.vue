@@ -234,19 +234,19 @@ export default {
             if (st === 200) {
               this.loading = false;
               this.showSnackBar("Comprovante anexado com sucesso!", 3000);
-              await this.delay(2000); // Aguarda 2 segundos
+              await this.delay(3000); // Aguarda 2 segundos
               this.showSnackBar(
                 "Pedido finalizado! Aguarde processamento e retorno da administração.",
-                3000
-              );
-
-              await this.delay(2000); // Aguarda 2 segundos
-              this.showSnackBar(
-                "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
                 5000
               );
+
+              await this.delay(5000); // Aguarda 2 segundos
+              this.showSnackBar(
+                "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
+                8000
+              );
             } else {
-              this.showSnackBar("Não foi possível anexar o arquivo!", 3000);
+              this.showSnackBar("Não foi possível anexar o arquivo!", 5000);
             }
           } catch (error) {
             console.log(error);
