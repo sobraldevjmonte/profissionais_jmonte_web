@@ -218,7 +218,6 @@ export default {
         // Agora você pode mapear as lojas se necessário
         console.log(lojas);
 
-        // Atualize sua lista_lojas com os dados da API
         this.lista_lojas = [
           { text: "", value: 0 }, // Opção vazia, se necessário
           ...lojas.map((loja) => ({
