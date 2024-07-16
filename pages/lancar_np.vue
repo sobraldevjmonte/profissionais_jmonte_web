@@ -264,7 +264,7 @@ export default {
         const dataForm = new FormData();
         dataForm.append("comprovante", this.comprovante);
 
-        this.loading = false;
+        
         try {
           const resposta = await axios.post(
             `${this.host}vendas/anexararquivos/${this.id_venda}`,
@@ -272,6 +272,7 @@ export default {
             { headers: { "Content-Type": "multipart/form-data" } }
           );
           const statusResposta = resposta.status;
+          this.loading = false;
           
           if (statusResposta === 200) {
             this.showSnackBar("Comprovante anexado com sucesso!", 4000);
