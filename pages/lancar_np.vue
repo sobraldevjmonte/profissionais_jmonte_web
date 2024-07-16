@@ -320,10 +320,10 @@ export default {
 }
 .spinner {
   border: 4px solid #dc4949;
-  border-left-color: #e18585;
+  border-left-color: #f3eded;
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
   animation: spin 2s linear infinite;
 }
 
