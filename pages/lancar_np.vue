@@ -215,8 +215,26 @@ export default {
         this.id_venda = resposta.data.id_venda;
 
         if (statusResposta === 201) {
-          this.anexarComprovante();
-          this.limparCampos();
+          this.loading = false;
+         let st =  await this.anexarComprovante();
+          console.log(st);
+          if (st === 200) {
+            this.showSnackBar("Comprovante anexado com sucesso!", 4000);
+            await this.delay(4500); // Aguarda 2 segundos
+            this.showSnackBar(
+              "Pedido finalizado! Aguarde processamento e retorno da administração.",
+              10000
+            );
+
+            await this.delay(10200); // Aguarda 2 segundos
+            this.showSnackBar(
+              "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
+              20000
+            );
+
+            this.comprovante_nome = "";
+            this.limparCampos();
+          }
         }
       } catch (error) {
         console.error(error);
@@ -264,7 +282,6 @@ export default {
         const dataForm = new FormData();
         dataForm.append("comprovante", this.comprovante);
 
-        
         try {
           const resposta = await axios.post(
             `${this.host}vendas/anexararquivos/${this.id_venda}`,
@@ -272,32 +289,14 @@ export default {
             { headers: { "Content-Type": "multipart/form-data" } }
           );
           const statusResposta = resposta.status;
-          this.loading = false;
-          
           if (statusResposta === 200) {
-            this.showSnackBar("Comprovante anexado com sucesso!", 4000);
-            await this.delay(4500); // Aguarda 2 segundos
-            this.showSnackBar(
-              "Pedido finalizado! Aguarde processamento e retorno da administração.",
-              10000
-            );
-
-            await this.delay(10200); // Aguarda 2 segundos
-            this.showSnackBar(
-              "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
-              20000
-            );
-
-            this.comprovante_nome = "";
-            this.limparCampos()
+            return 200;
           } else {
             this.showSnackBar("Não foi possível anexar o arquivo!", 4000);
           }
         } catch (error) {
           console.error(error);
-        } 
-
-
+        }
       } else {
         this.showSnackBar("Comprovante não incluído!", 4000);
       }
