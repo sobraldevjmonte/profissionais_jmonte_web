@@ -15,7 +15,7 @@
         color="red"
         size="70"
       ></v-progress-circular>
-      <span class="loading-text">Carregando, por favor aguarde...</span>
+      <span class="loading-text">Salvando, por favor aguarde...</span>
     </div>
   </v-overlay>
     <MenuProfissionais :usuariologado="nomeUsuario" />
@@ -234,13 +234,13 @@ export default {
             if (st === 200) {
               this.loading = false;
               this.showSnackBar("Comprovante anexado com sucesso!", 3000);
-              await this.delay(3000); // Aguarda 2 segundos
+              await this.delay(1000); // Aguarda 2 segundos
               this.showSnackBar(
                 "Pedido finalizado! Aguarde processamento e retorno da administração.",
                 3000
               );
 
-              await this.delay(3000); // Aguarda 2 segundos
+              await this.delay(1000); // Aguarda 2 segundos
               this.showSnackBar(
                 "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
                 5000
@@ -350,7 +350,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Cor semi-transparente */
+  background-color: rgba(0, 0, 0, 0.8); /* Cor semi-transparente */
 }
 .loading-container {
   display: flex;
