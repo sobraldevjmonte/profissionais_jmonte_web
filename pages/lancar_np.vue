@@ -8,10 +8,16 @@
     align="center"
     style="background-color: #fffafa; max-width: 400px"
   >
-    <v-overlay :value="loading">
-      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    <v-overlay :value="isLoading">
+      <div class="loading-container">
+        <v-progress-circular
+          indeterminate
+          color="red"
+          size="70"
+        ></v-progress-circular>
+        <span class="loading-text">Carregando, por favor aguarde...</span>
+      </div>
     </v-overlay>
-
     <MenuProfissionais :usuariologado="nomeUsuario" />
     <template>
       <div class="pa-2 mt-1 mb-1">
@@ -125,9 +131,9 @@
         </v-btn>
       </template>
     </v-snackbar>
-    <div v-if="loading" class="overlay">
+    <!-- <div v-if="loading" class="overlay">
       <div class="spinner"></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -344,5 +350,16 @@ export default {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); /* Cor semi-transparente */
 }
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
+.loading-text {
+  color: white;
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
 </style>
