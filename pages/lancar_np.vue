@@ -8,6 +8,10 @@
     align="center"
     style="background-color: #fffafa; max-width: 400px"
   >
+    <v-overlay :value="loading">
+      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+    </v-overlay>
+
     <MenuProfissionais :usuariologado="nomeUsuario" />
     <template>
       <div class="pa-2 mt-1 mb-1">
@@ -216,15 +220,14 @@ export default {
         const statusResposta = resposta.status;
         this.id_venda = resposta.data.id_venda;
 
-        
         if (statusResposta === 201) {
           try {
             let st = await this.anexarComprovante();
             console.log(st);
             if (st === 200) {
               this.loading = false;
-              this.showSnackBar("Comprovante anexado com sucesso!", 2000);
-              await this.delay(2000); // Aguarda 2 segundos
+              this.showSnackBar("Comprovante anexado com sucesso!", 3000);
+              await this.delay(3000); // Aguarda 2 segundos
               this.showSnackBar(
                 "Pedido finalizado! Aguarde processamento e retorno da administração.",
                 3000
@@ -332,4 +335,14 @@ export default {
     transform: rotate(360deg);
   }
 }
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor semi-transparente */
+}
+
 </style>
