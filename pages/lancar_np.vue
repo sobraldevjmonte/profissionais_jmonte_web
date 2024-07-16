@@ -221,7 +221,7 @@ export default {
       } catch (error) {
         console.error(error);
       } finally {
-        this.loading = false;
+        //this.loading = false;
       }
 
       // this.showSnackBar(
@@ -270,6 +270,7 @@ export default {
           { headers: { "Content-Type": "multipart/form-data" } }
         );
         const statusResposta = resposta.status;
+        this.loading = false;
         if (statusResposta === 200) {
           this.showSnackBar("Comprovante anexado com sucesso!", 4000);
           await this.delay(4500); // Aguarda 2 segundos
