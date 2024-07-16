@@ -264,6 +264,7 @@ export default {
         const dataForm = new FormData();
         dataForm.append("comprovante", this.comprovante);
 
+        this.loading = false;
         try {
           const resposta = await axios.post(
             `${this.host}vendas/anexararquivos/${this.id_venda}`,
@@ -271,7 +272,7 @@ export default {
             { headers: { "Content-Type": "multipart/form-data" } }
           );
           const statusResposta = resposta.status;
-          this.loading = false;
+          
           if (statusResposta === 200) {
             this.showSnackBar("Comprovante anexado com sucesso!", 4000);
             await this.delay(4500); // Aguarda 2 segundos
@@ -287,13 +288,15 @@ export default {
             );
 
             this.comprovante_nome = "";
+            this.limparCampos()
           } else {
             this.showSnackBar("Não foi possível anexar o arquivo!", 4000);
           }
         } catch (error) {
           console.error(error);
-        } finally {
-        }
+        } 
+
+
       } else {
         this.showSnackBar("Comprovante não incluído!", 4000);
       }
