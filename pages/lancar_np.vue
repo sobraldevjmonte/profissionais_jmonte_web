@@ -8,16 +8,16 @@
     align="center"
     style="background-color: #fffafa; max-width: 400px"
   >
-    <v-overlay :value="isLoading">
-      <div class="loading-container">
-        <v-progress-circular
-          indeterminate
-          color="red"
-          size="70"
-        ></v-progress-circular>
-        <span class="loading-text">Carregando, por favor aguarde...</span>
-      </div>
-    </v-overlay>
+  <v-overlay :value="loading">
+    <div class="loading-container">
+      <v-progress-circular
+        indeterminate
+        color="red"
+        size="70"
+      ></v-progress-circular>
+      <span class="loading-text">Carregando, por favor aguarde...</span>
+    </div>
+  </v-overlay>
     <MenuProfissionais :usuariologado="nomeUsuario" />
     <template>
       <div class="pa-2 mt-1 mb-1">
@@ -44,6 +44,7 @@
                 required
                 min="4"
                 @input="validarCampos"
+                inputmode="numeric"
               ></v-text-field>
             </v-col>
             <v-col cols="12">
@@ -271,6 +272,7 @@ export default {
       this.nomeUsuario = sessionStorage.getItem("nomeUsuario");
     },
     validarCampos() {
+      this.numeronp = this.numeronp.replace(/\D/g, '');
       this.botaoDesabilitado =
         this.numeronp.length < 1 ||
         this.lojaselecionada < 1 ||
