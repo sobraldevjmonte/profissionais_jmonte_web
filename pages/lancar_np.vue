@@ -215,21 +215,22 @@ export default {
         this.id_venda = resposta.data.id_venda;
 
         if (statusResposta === 201) {
-          this.loading = false;
+          
          let st =  await this.anexarComprovante();
           console.log(st);
           if (st === 200) {
-            this.showSnackBar("Comprovante anexado com sucesso!", 4000);
-            await this.delay(4500); // Aguarda 2 segundos
+            this.loading = false;
+            this.showSnackBar("Comprovante anexado com sucesso!", 3000);
+            await this.delay(3000); // Aguarda 2 segundos
             this.showSnackBar(
               "Pedido finalizado! Aguarde processamento e retorno da administração.",
-              10000
+              5000
             );
 
-            await this.delay(10200); // Aguarda 2 segundos
+            await this.delay(5000); // Aguarda 2 segundos
             this.showSnackBar(
               "Você pode acompanhar seus pedidos no menu 'Meus Pedidos'",
-              20000
+              10000
             );
 
             this.comprovante_nome = "";
@@ -290,7 +291,7 @@ export default {
           );
           const statusResposta = resposta.status;
           if (statusResposta === 200) {
-            return 200;
+            return statusResposta;
           } else {
             this.showSnackBar("Não foi possível anexar o arquivo!", 4000);
           }
