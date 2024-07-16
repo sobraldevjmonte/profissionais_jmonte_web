@@ -8,16 +8,16 @@
     align="center"
     style="background-color: #fffafa; max-width: 400px"
   >
-  <v-overlay :value="loading">
-    <div class="loading-container">
-      <v-progress-circular
-        indeterminate
-        color="red"
-        size="70"
-      ></v-progress-circular>
-      <span class="loading-text">Salvando, por favor aguarde...</span>
-    </div>
-  </v-overlay>
+    <v-overlay :value="loading">
+      <div class="loading-container">
+        <v-progress-circular
+          indeterminate
+          color="red"
+          size="70"
+        ></v-progress-circular>
+        <span class="loading-text">Salvando, por favor aguarde...</span>
+      </div>
+    </v-overlay>
     <MenuProfissionais :usuariologado="nomeUsuario" />
     <template>
       <div class="pa-2 mt-1 mb-1">
@@ -173,18 +173,21 @@ export default {
       lojaselecionada: 0,
       id_venda: 0,
 
-      lista_lojas: [
-        { text: "", value: 0 },
-        { text: "KENNEDY", value: 1 },
-        { text: "SACY", value: 2 },
-        { text: "PIÇARRA", value: 3 },
-      ],
+      lista_lojas: [{ text: "", value: 0 }],
+
+      // lista_lojas: [
+      //   { text: "", value: 0 },
+      //   { text: "KENNEDY", value: 1 },
+      //   { text: "SACY", value: 2 },
+      //   { text: "PIÇARRA", value: 3 },
+      // ],
     };
   },
   mounted() {
     this.showAlertSucesso = false;
     this.showAlertErro = false;
     this.getLogado();
+    this.listarLojas();
 
     if (this.logado === "S") {
       //   this.showSistema = true
@@ -206,6 +209,26 @@ export default {
       this.lojaselecionada = null;
       // this.msg = "";
       // this.texto_snackbar = "";
+    },
+    async listarLojas() {
+      try {
+        const resposta = await axios.get(`${this.host}vendas/listar_lojas/`);
+        const lojas = resposta.data.lojas; // Extrai as lojas da resposta
+
+        // Agora você pode mapear as lojas se necessário
+        console.log(lojas);
+
+        // Atualize sua lista_lojas com os dados da API
+        this.lista_lojas = [
+          { text: "", value: 0 }, // Opção vazia, se necessário
+          ...lojas.map((loja) => ({
+            text: loja.descricao_loja, // Ajuste conforme a estrutura do objeto de loja retornado
+            value: loja.id_loja_venda, // Ajuste conforme a estrutura do objeto de loja retornado
+          })),
+        ];
+      } catch (error) {
+        console.log(error);
+      }
     },
     async finalizarPedido(st) {
       this.msg = "";
@@ -272,7 +295,7 @@ export default {
       this.nomeUsuario = sessionStorage.getItem("nomeUsuario");
     },
     validarCampos() {
-      this.numeronp = this.numeronp.replace(/\D/g, '');
+      this.numeronp = this.numeronp.replace(/\D/g, "");
       this.botaoDesabilitado =
         this.numeronp.length < 1 ||
         this.lojaselecionada < 1 ||
