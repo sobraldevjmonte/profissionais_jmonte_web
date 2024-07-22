@@ -55,7 +55,7 @@
                 label="Selecione a Loja"
                 overflow
                 editable
-                class="text-caption font-weight-light custom-font-size"
+                class="large-font"
                 @change="selecionarLoja"
                 :menu-props="{ contentClass: 'red-first-item' }"
                 @input="validarCampos"
@@ -344,12 +344,12 @@ export default {
 </script>
 <style scoped>
 .custom-font-size .v-label {
-  font-size: 1rem; /* Tamanho da fonte do label */
+  font-size: 1.8rem; /* Tamanho da fonte do label */
   font-weight: bold; /* Deixa o label em negrito */
 }
 
 .custom-font-size .v-input__control {
-  font-size: 1rem; /* Tamanho da fonte do texto de entrada, se necessário */
+  font-size: 1.8rem; /* Tamanho da fonte do texto de entrada, se necessário */
 }
 .spinner {
   border: 4px solid #dc4949;
@@ -390,23 +390,17 @@ export default {
 .v-text-field--type-text input[type="number"] {
   -moz-appearance: textfield;
 }
-
-.v-text-field--type-text input[type="number"]::-webkit-outer-spin-button,
-.v-text-field--type-text input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.large-font .v-input__control .v-input__slot,
-.large-font .v-select__selection.v-input__control {
-  font-size: 1.5rem; /* Tamanho da fonte desejado */
-}
-
-.large-font .v-label {
-  font-size: 1.5rem; /* Tamanho da fonte do label */
+.large-font .v-select__selection,
+.large-font .v-label,
+.large-font .v-input__control .v-input__slot {
+  font-size: 1.5rem !important; /* Ajuste o tamanho da fonte conforme necessário */
 }
 
 .large-font .v-select__selections {
-  font-size: 1.5rem; /* Tamanho da fonte do texto selecionado */
+  font-size: 1.5rem !important; /* Ajuste o tamanho da fonte conforme necessário */
+}
+
+.large-font .v-select__selections .v-select__selection--comma {
+  font-size: 1.5rem !important; /* Ajuste o tamanho da fonte conforme necessário */
 }
 </style>
