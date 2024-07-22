@@ -396,4 +396,17 @@ export default {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.large-font .v-input__control .v-input__slot,
+.large-font .v-select__selection.v-input__control {
+  font-size: 1.5rem; /* Tamanho da fonte desejado */
+}
+
+.large-font .v-label {
+  font-size: 1.5rem; /* Tamanho da fonte do label */
+}
+
+.large-font .v-select__selections {
+  font-size: 1.5rem; /* Tamanho da fonte do texto selecionado */
+}
 </style>

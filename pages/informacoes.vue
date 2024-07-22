@@ -23,10 +23,10 @@
             block
             outlined
             color="green"
-            href="https://api.whatsapp.com/send?phone=5586994321635"
+            href="https://api.whatsapp.com/send?phone=5586998088525"
             >Whatsapp
 
-            <a href="https://api.whatsapp.com/send?phone=5586994321635"
+            <a href="https://api.whatsapp.com/send?phone=5586998088525"
               ><v-img :src="'img/whats.png'" class="imagem_whats"></v-img></a
           ></v-btn>
         </v-row>

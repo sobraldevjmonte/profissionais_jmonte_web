@@ -7,24 +7,18 @@
         <v-col cols="11" sm="8" md="6" lg="4">
           <v-card class="mb-4" style="height: 80px" elevation="0">
             <v-card-text class="d-flex align-center justify-center">
-              <span class="central-text">
-               
-              </span>
+              <span class="central-text"> </span>
             </v-card-text>
           </v-card>
 
-          <v-card class="mb-4" style="height: 120px; background-color: #DFF1FF;">
+          <v-card class="mb-4" style="height: 120px; background-color: #dff1ff">
             <router-link
               to="/lancar_np"
               class="text-decoration-none d-flex align-center"
               style="height: 100%; width: 100%"
             >
               <div class="d-flex align-center">
-                <v-img
-                  src="img_atalhos/a.avif"
-                  height="60"
-                  width="60"
-                ></v-img>
+                <v-img src="img_atalhos/a.avif" height="60" width="60"></v-img>
                 <span class="font-size-medium ml-2">Lançar Np/Nfe/NfCe</span>
               </div>
             </router-link>
@@ -36,15 +30,29 @@
               style="height: 100%; width: 100%"
             >
               <div class="d-flex align-center">
-                <v-img
-                  src="img_atalhos/b.jpeg"
-                  height="60"
-                  width="60"
-                ></v-img>
+                <v-img src="img_atalhos/b.jpeg" height="60" width="60"></v-img>
                 <span class="font-size-medium ml-2">Acompanhar Pedidos</span>
               </div>
             </router-link>
           </v-card>
+          <v-card class="mb-4" style="height: 120px; background-color: #dff1ff">
+            <a
+              href="https://api.whatsapp.com/send?phone=5586998088525"
+              class="text-decoration-none d-flex align-center"
+              style="height: 100%; width: 100%"
+            >
+              <v-img
+                src="img_atalhos/whats.png"
+                height="60"
+                width="60"
+                max-width="60"
+                max-height="60"
+              ></v-img>
+              <span class="font-size-medium ml-2">Fale conosco</span>
+            </a>
+          </v-card>
+          
+
           <!-- <v-card class="mb-4" style="height: 80px">
             <router-link
               to="/pagina3"
