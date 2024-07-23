@@ -381,6 +381,8 @@ export default {
   justify-content: center;
 }
 
+
+
 .loading-text {
   color: white;
   margin-top: 16px;
