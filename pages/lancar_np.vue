@@ -253,6 +253,7 @@ export default {
         if (statusResposta === 201) {
           try {
             let st = await this.anexarComprovante();
+            
             console.log(st);
             if (st === 200) {
               this.loading = false;
