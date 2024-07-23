@@ -239,6 +239,7 @@ export default {
           id_usuario: this.id_usuario,
           lojaselecionada: this.lojaselecionada,
           numeronp: this.numeronp,
+          imagem: this.comprovante_nome
         };
         const resposta = await axios.post(
           `${this.host}vendas/finalizar_pedido_parceiro_jmonte/`,
