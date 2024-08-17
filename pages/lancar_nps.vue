@@ -36,6 +36,18 @@
             </router-link>
           </v-card>
           <v-card class="mb-4" style="height: 120px; background-color: #dff1ff">
+            <router-link
+              to="/premios"
+              class="text-decoration-none d-flex align-center"
+              style="height: 100%; width: 100%"
+            >
+              <div class="d-flex align-center">
+                <v-img src="img_atalhos/trocar.png" height="60" width="60"></v-img>
+                <span class="font-size-medium ml-2">Trocar Pontos</span>
+              </div>
+            </router-link>
+          </v-card>
+          <v-card class="mb-4" style="height: 120px;">
             <a
               href="https://api.whatsapp.com/send?phone=5586998088525"
               class="text-decoration-none d-flex align-center"

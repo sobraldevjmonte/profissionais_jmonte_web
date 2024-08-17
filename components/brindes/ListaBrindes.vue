@@ -331,6 +331,7 @@ export default {
     async anexarImagem() {
       const dataForm = new FormData();
       dataForm.append("imagembrinde", this.imagem);
+      console.log(dataForm)
 
       await axios.post(
         `${this.host}adm_brindes/anexararquivos/${this.id_novobrinde}`,
@@ -429,6 +430,8 @@ export default {
         this.imagem = e;
         this.imagem_name = e.name;
       }
+
+      console.log(this.imagem);
     },
     maiusculasDescricao() {
       this.descricao_cad = this.descricao_cad.toUpperCase();
