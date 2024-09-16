@@ -29,20 +29,28 @@
           elevation="10"
           style="height: 160px"
         >
-          <v-card-title
-            class="pa-2 text-h6"
-            style="height: 60px"
-          >
+          <v-card-title class="pa-2 text-h6" style="height: 60px">
             <v-row class="titulo">
               <v-col> J Monte {{ list.descricao_loja }} </v-col>
               <v-col cols="2">
                 <v-icon
-                  color="red"
-                  @click="deletarVenda(list.id_vendas)"
+                  :color="list.status === 'REJEITADO' ? 'orange' : 'red'"
+                  @click="
+                    list.status === 'REJEITADO'
+                      ? mostrarMotivoRejeicao(list.id_vendas)
+                      : deletarVenda(list.id_vendas)
+                  "
                   size="30"
-                  title="Deletar Venda"
-                  >delete</v-icon
+                  :title="
+                    list.status === 'REJEITADO'
+                      ? 'Motivo de Rejeição'
+                      : 'Deletar Venda'
+                  "
                 >
+                  {{
+                    list.status === "REJEITADO" ? "mdi-alert-circle" : "delete"
+                  }}
+                </v-icon>
               </v-col>
             </v-row>
           </v-card-title>
@@ -130,6 +138,26 @@
     <div v-if="loading" class="overlay">
       <div class="spinner"></div>
     </div>
+
+    <!-- Modal -->
+    <v-dialog v-model="modalVisible" max-width="600px">
+      <v-card>
+        <v-card-title>Motivo da Rejeição</v-card-title>
+        <v-card-text>{{ motivoDaRejeicao }}</v-card-text>
+
+        <v-divider></v-divider>
+
+        <v-card-text style="font-size: 14px; color: grey; text-align: left;" class="pt-5" >
+          Entre em contato na opção 'Fale Conosco'
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="modalVisible = false"
+            >Fechar</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -150,8 +178,9 @@ export default {
       nomeUsuario: "",
       corselecionada: 0,
       filtercliente: "",
-
       loading: false,
+      modalVisible: false, // Estado do modal (visível ou não)
+      motivoDaRejeicao: "", // Armazena o motivo da rejeição
     };
   },
   computed: {
@@ -200,6 +229,22 @@ export default {
       this.totalPontosAprovados = pontosPedidos.data.pontos.pontosAprovados;
       this.totalPontosRejeitados = pontosPedidos.data.pontos.pontosRejeitados;
     },
+    async mostrarMotivoRejeicao(idVenda) {
+      try {
+        let rs = await axios.get(
+          `${this.host}vendas/motivo-da-rejeicao/${idVenda}`
+        );
+        this.motivoDaRejeicao =
+          rs.data.motivo ;
+        this.exibirModal();
+      } catch (error) {
+        console.error("Erro ao obter o motivo da rejeição:", error);
+      }
+    },
+    exibirModal() {
+      this.modalVisible = true; // Exibe o modal
+    },
+
     novoPedido() {
       this.$router.push("/lancar_nps");
     },
@@ -239,6 +284,7 @@ export default {
           this.lpedidos = dados;
         }
       } catch (error) {
+        console.error(error);
       } finally {
         this.loading = false;
       }
@@ -336,10 +382,10 @@ export default {
 }
 
 .custom-font-size .v-label {
-  font-size: 1.0rem; /* Tamanho da fonte do label */
+  font-size: 1rem; /* Tamanho da fonte do label */
 }
 
 .custom-font-size .v-input__control {
-  font-size: 1.0rem; /* Tamanho da fonte do texto de entrada, se necessário */
+  font-size: 1rem; /* Tamanho da fonte do texto de entrada, se necessário */
 }
 </style>
