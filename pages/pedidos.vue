@@ -32,7 +32,7 @@
           <v-card-title class="pa-2 text-h6" style="height: 60px">
             <v-row class="titulo">
               <v-col> J Monte {{ list.descricao_loja }} </v-col>
-              <v-col cols="2">
+              <v-col v-if="list.status !== 'APROVADO'" cols="2">
                 <v-icon
                   :color="list.status === 'REJEITADO' ? 'orange' : 'red'"
                   @click="
