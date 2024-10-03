@@ -170,7 +170,7 @@ export default {
       botaoDesabilitado: true,
 
       numeronp: "",
-      lojaselecionada: 0,
+      lojaselecionada: 999,
       id_venda: 0,
 
       lista_lojas: [{ text: "", value: 0 }],
@@ -219,7 +219,7 @@ export default {
         console.log(lojas);
 
         this.lista_lojas = [
-          { text: "", value: 0 }, // Opção vazia, se necessário
+          { text: "", value: 999 }, // Opção vazia, se necessário
           ...lojas.map((loja) => ({
             text: loja.descricao_loja, // Ajuste conforme a estrutura do objeto de loja retornado
             value: loja.id_loja_venda, // Ajuste conforme a estrutura do objeto de loja retornado
@@ -284,11 +284,6 @@ export default {
       } finally {
         //this.loading = false;
       }
-
-      // this.showSnackBar(
-      //   "Pedido finalizado! Aguarde processamento e retorno da administração.",
-      //   10000
-      // );
     },
     getLogado() {
       this.logado = sessionStorage.getItem("logado");
@@ -299,7 +294,7 @@ export default {
       this.numeronp = this.numeronp.replace(/\D/g, "");
       this.botaoDesabilitado =
         this.numeronp.length < 1 ||
-        this.lojaselecionada < 1 ||
+        this.lojaselecionada > 900 ||
         this.comprovante_size < 1;
     },
     selecionarLoja(e) {
